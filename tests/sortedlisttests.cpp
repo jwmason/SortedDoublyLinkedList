@@ -30,6 +30,7 @@ TEST_CASE("InsertTest", "[RequiredOne]")
     l.insert(1, "One");
     l.insert(2, "Two");
     REQUIRE(l.size() == 2);
+    REQUIRE(l.insert(2, "ShouldFail") == false);
 }
 
 TEST_CASE("PreliminaryTests", "[RequiredOne]")
