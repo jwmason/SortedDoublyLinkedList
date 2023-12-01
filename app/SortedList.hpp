@@ -13,8 +13,18 @@ template<typename Key, typename Value>
 class SortedList
 {
 private:
-	// fill in private member data here
+	// make the doubly linked list
+	struct Node
+	{
+		Key key;
+		Value value;
+		Node* prev;
+		Node* next;
 
+		Node(const Key& k, const Value& v) : key(k), value(v), prev(nullptr), next(nullptr) {}
+	};
+
+	Node* head;
 
 public:
 	SortedList();
@@ -108,7 +118,7 @@ public:
 
 
 template<typename Key, typename Value>
-SortedList<Key,Value>::SortedList()
+SortedList<Key,Value>::SortedList() : head(nullptr)
 {}
 
 
@@ -154,7 +164,37 @@ bool SortedList<Key,Value>::isEmpty() const noexcept
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 {
-	return false;  // STUB;  fix then remove this comment
+	Node* newNode = new Node(k, v);
+
+    if (head == nullptr || k < head->key)
+    {
+        newNode->next = head;
+        if (head != nullptr)
+            head->prev = newNode;
+        head = newNode;
+        return true;
+    }
+
+    Node* current = head;
+    while (current->next != nullptr && current->next->key < k)
+    {
+        current = current->next;
+    }
+
+    if (current->next != nullptr && current->next->key == k)
+    {
+        // Key already present
+        delete newNode;
+        return false;
+    }
+
+    newNode->next = current->next;
+    if (current->next != nullptr)
+        current->next->prev = newNode;
+    current->next = newNode;
+    newNode->prev = current;
+
+    return true;
 }
 
 
@@ -163,7 +203,16 @@ bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::contains(const Key &k) const noexcept
 {
-	return false;  // STUB;  fix then remove this comment
+	Node* current = head;
+	while (current != nullptr)
+	{
+		if (current->key == k)
+		{
+			return true;
+		}
+		current = current->next;
+	}
+	return false;
 }
 
 template<typename Key, typename Value>
