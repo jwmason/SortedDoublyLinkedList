@@ -164,7 +164,12 @@ size_t SortedList<Key,Value>::size() const noexcept
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::isEmpty() const noexcept
 {
-	return false;  // STUB;  fix then remove this comment
+	// If there is no Nodes, return true. Else return false.
+	if (head == nullptr)
+	{
+		return true;
+	}
+	return false;
 }
 
 
