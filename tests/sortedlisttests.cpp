@@ -10,14 +10,27 @@ TEST_CASE("SizeTest", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
     REQUIRE(l.size() == 0);
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l.size() == 2);
 }
 
 TEST_CASE("EmptyTest", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
     REQUIRE(l.isEmpty() == true);
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l.isEmpty() == false);
 }
 
+TEST_CASE("InsertTest", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l.size() == 2);
+}
 
 TEST_CASE("PreliminaryTests", "[RequiredOne]")
 {

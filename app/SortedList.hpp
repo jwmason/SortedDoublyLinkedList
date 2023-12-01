@@ -178,7 +178,50 @@ bool SortedList<Key,Value>::isEmpty() const noexcept
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 {
-	return false;
+	// Make a new Node
+	Node* newNode = new Node(k, v);
+
+	// If the head is null or the new key is less then the key of the current Node, new Node is inserted at the beginning of the list
+	if (head == nullptr || k < head->key)
+	{
+		// Set the next Node to head and see if it exists
+		newNode->next = head;
+		// If it does, set its previous to newNode and make it the new head no matter what
+		if (head != nullptr)
+		{
+			head->prev = newNode;
+		}
+		head = newNode;
+		return true;
+	}
+
+	// If the head is not null or the k is greater than current key, loop through doubly linked list to find correct position based on key
+	Node* current = head;
+	// Loop until go through all nodes or the current k is > k
+	while (current->next != nullptr && current->next->key < k)
+	{
+		current = current->next;
+	}
+
+	// After finding correct position, check if the key is already in the linked list
+	if (current->next != nullptr && current->next->key == k)
+	{
+		// Delete newNode and return false
+		delete newNode;
+		return false;
+	}
+
+	// If not, set the newNode into the doubly linked list
+	newNode->next = current->next;
+	// If current->next is not the last node, make its previous newNode
+	if (current->next != nullptr)
+	{
+		current->next->prev = newNode;
+	}
+	// Set current->next to newNode and the newNode prev to current and return true
+	current->next = newNode;
+	newNode->prev = current;
+	return true;
 }
 
 
