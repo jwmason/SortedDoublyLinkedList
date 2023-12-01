@@ -245,7 +245,27 @@ void SortedList<Key,Value>::remove(const Key &k)
 template<typename Key, typename Value>
 unsigned SortedList<Key,Value>::getIndex(const Key &k) const
 {
-	throw KeyNotFoundException{"Key not found in list"};  // STUB;  fix then remove this comment
+	// Set current Node to a Node pointer
+	Node* current = head;
+	// Loop through the nodes while current is not nullptr and the key is not found
+	while(current != nullptr && current->key != k)
+	{
+		current = current->next;
+	}
+	// If current is not null, find the index
+	if (current != nullptr)
+	{
+		unsigned index = 0;
+		// Loop by counting down until null
+		while (current->prev != nullptr)
+		{
+			current = current->prev;
+			index ++;
+		}
+		return index;
+	}
+	// If the current is null, that means the key does not exist
+	throw KeyNotFoundException{"Key not found in list"};
 
 }
 

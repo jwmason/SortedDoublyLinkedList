@@ -24,6 +24,7 @@ TEST_CASE("EmptyTest", "[RequiredOne]")
     REQUIRE(l.isEmpty() == false);
 }
 
+// Still have to test that this puts the Nodes in order by key
 TEST_CASE("InsertTest", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
@@ -31,6 +32,15 @@ TEST_CASE("InsertTest", "[RequiredOne]")
     l.insert(2, "Two");
     REQUIRE(l.size() == 2);
     REQUIRE(l.insert(2, "ShouldFail") == false);
+}
+
+TEST_CASE("GetIndexTest", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l.getIndex(1) == 0);
+    REQUIRE(l.getIndex(2) == 1);
 }
 
 TEST_CASE("PreliminaryTests", "[RequiredOne]")
