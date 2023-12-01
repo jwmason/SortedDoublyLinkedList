@@ -6,6 +6,13 @@
 
 namespace{
 
+TEST_CASE("SizeTests", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    REQUIRE(l.size() == 0);
+}
+
+
 TEST_CASE("PreliminaryTests", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;

@@ -149,7 +149,16 @@ SortedList<Key,Value>::~SortedList()
 template<typename Key, typename Value>
 size_t SortedList<Key,Value>::size() const noexcept
 {
-	return 0; // STUB;  fix then remove this comment
+	// Initialize size counter and Node pointer holder
+	size_t counter = 0;
+	Node * tmp = head;
+	// Loop through every Node and count it
+	while (tmp != nullptr)
+	{
+		counter ++;
+		tmp = tmp -> next;
+	}
+	return counter;
 }
 
 template<typename Key, typename Value>
@@ -164,37 +173,7 @@ bool SortedList<Key,Value>::isEmpty() const noexcept
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 {
-	Node* newNode = new Node(k, v);
-
-    if (head == nullptr || k < head->key)
-    {
-        newNode->next = head;
-        if (head != nullptr)
-            head->prev = newNode;
-        head = newNode;
-        return true;
-    }
-
-    Node* current = head;
-    while (current->next != nullptr && current->next->key < k)
-    {
-        current = current->next;
-    }
-
-    if (current->next != nullptr && current->next->key == k)
-    {
-        // Key already present
-        delete newNode;
-        return false;
-    }
-
-    newNode->next = current->next;
-    if (current->next != nullptr)
-        current->next->prev = newNode;
-    current->next = newNode;
-    newNode->prev = current;
-
-    return true;
+	return false;
 }
 
 
@@ -203,15 +182,6 @@ bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::contains(const Key &k) const noexcept
 {
-	Node* current = head;
-	while (current != nullptr)
-	{
-		if (current->key == k)
-		{
-			return true;
-		}
-		current = current->next;
-	}
 	return false;
 }
 
