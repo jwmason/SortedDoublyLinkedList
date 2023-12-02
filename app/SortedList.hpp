@@ -374,14 +374,39 @@ unsigned SortedList<Key,Value>::getIndex(const Key &k) const
 template<typename Key, typename Value>
 Value & SortedList<Key,Value>::operator[] (const Key &k) 
 {
-	throw KeyNotFoundException{"Key not found in list"};  // STUB;  fix then remove this comment
-
+	// Initialize Node pointer
+	Node* current = head;
+	// Loop through all the Nodes until the key is found
+	while (current != nullptr && current->key !=k)
+	{
+		current = current->next;
+	}
+	// If key is found, return its value
+	if (current != nullptr)
+	{
+		return current->value;
+	}
+	// If it is not, throw exception
+	throw KeyNotFoundException{"Key not found in list"};
 }
 
 template<typename Key, typename Value>
 const Value & SortedList<Key,Value>::operator[] (const Key &k) const 
 {
-	throw KeyNotFoundException{"Key not found in list"};  // STUB;  fix then remove this comment
+	// Initialize Node pointer
+	Node* current = head;
+	// Loop through all the Nodes until the key is found
+	while (current != nullptr && current->key !=k)
+	{
+		current = current->next;
+	}
+	// If key is found, return its value
+	if (current != nullptr)
+	{
+		return current->value;
+	}
+	// If it is not, throw exception
+	throw KeyNotFoundException{"Key not found in list"};
 }
 
 template<typename Key, typename Value>

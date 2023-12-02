@@ -122,6 +122,15 @@ TEST_CASE("Copy1", "[RequiredOne]")
     REQUIRE(p.size() == 1);
 }
 
+TEST_CASE("BracketTest", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l[1] == "One");
+    REQUIRE(l[2] == "Two");
+}
+
 TEST_CASE("ReverseInserts", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
@@ -161,11 +170,6 @@ TEST_CASE("MyFirstRemovals2", "[Explanatory]")
     REQUIRE(l.contains(3));
     REQUIRE(! l.contains(4) );
 }
-
-
-
-
-
 
 TEST_CASE("MyFirstRemovals3", "[Explanatory]")
 {
@@ -291,6 +295,9 @@ TEST_CASE("SubscriptOperatorReturnsReference", "[RequiredFour]")
     REQUIRE(cms[1105] == "Second");
     REQUIRE(cms[1729] == "Third");
     REQUIRE(cms[2465] == "Fourth");
+
+    const SortedList<unsigned, std::string> & constCMS = cms;
+    REQUIRE(constCMS[1105] == "Second");
 }
 // don't forget to test the const version too.  See your notes for how to do this!
 
