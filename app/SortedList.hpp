@@ -230,6 +230,20 @@ bool SortedList<Key,Value>::insert(const Key &k, const Value &v)
 template<typename Key, typename Value>
 bool SortedList<Key,Value>::contains(const Key &k) const noexcept
 {
+	// Initialize a Node pointer
+	Node* current = head;
+	// Loop through all the nodes to see if doubly linked list contains that key
+	while (current != nullptr)
+	{
+		// Check if the current Node's key is == k
+		if (current->key == k)
+		{
+			return true;
+		}
+		// Increment Node
+		current = current->next;
+	}
+	// If not, return false
 	return false;
 }
 

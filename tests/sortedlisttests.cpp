@@ -24,7 +24,6 @@ TEST_CASE("EmptyTest", "[RequiredOne]")
     REQUIRE(l.isEmpty() == false);
 }
 
-// Still have to test that this puts the Nodes in order by key
 TEST_CASE("InsertTest", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
@@ -45,6 +44,16 @@ TEST_CASE("GetIndexTest", "[RequiredOne]")
     l.insert(2, "Two");
     REQUIRE(l.getIndex(1) == 0);
     REQUIRE(l.getIndex(2) == 1);
+    REQUIRE_THROWS_AS( l.getIndex(600), KeyNotFoundException );
+}
+
+TEST_CASE("ContainsTest", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    REQUIRE(l.contains(1) == true);
+    REQUIRE(l.contains(3) == false);
 }
 
 TEST_CASE("PreliminaryTests", "[RequiredOne]")
