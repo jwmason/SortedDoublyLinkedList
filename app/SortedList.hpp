@@ -421,6 +421,7 @@ const Key & SortedList<Key,Value>::largestLessThan(const Key & k) const
 		// Check if the current key is less than given key. If so, temporarily set it as the largestLessThan_key
 		if (current->key < k)
 		{
+			// Since the keys are in order, this will automatically pick the highest key
 			largestLessThan_key = &current->key;
 		}
 		// Increment Node
@@ -438,7 +439,22 @@ const Key & SortedList<Key,Value>::largestLessThan(const Key & k) const
 template<typename Key, typename Value>
 const Key & SortedList<Key,Value>::smallestGreaterThan(const Key & k) const
 {
-	throw KeyNotFoundException{"Key not found in list"};   // STUB;  fix then remove this comment
+	// Initialize Node pointer
+	Node* current = head;
+	// Loop through all the Nodes
+	while (current != nullptr)
+	{
+		// Check if the key is greater than given key
+		if (current->key > k)
+		{
+			// Can simply return because the linked list is in ascending order
+			return current->key;
+		}
+		// Increment Node
+		current = current->next;
+	}
+	// If no Nodes are found, then return exception
+	throw KeyNotFoundException{"Key not found in list"};
 }
 
 
