@@ -133,9 +133,38 @@ template<typename Key, typename Value>
 SortedList<Key,Value> & SortedList<Key,Value>::operator=(const SortedList & st)
 {
 	// l1 = l2
-	if( this != &st )
+	if ( this != &st )
 	{
-
+		// Loop through all the Nodes in SortedList and delete them
+		while (head != nullptr)
+		{
+			Node* current = head;
+			head = head->next;
+			delete current;
+		}
+		// Copy st into given SortedList
+		Node* current = st.head;
+		Node* tail = nullptr;
+		// Loop through Nodes in st and add to SortedList
+		while (current != nullptr)
+		{
+			Node* newNode = new Node(current->key, current->value);
+			// If the st is empty, set newNode as head and tail
+			if (head == nullptr)
+			{
+				head = newNode;
+				tail = newNode;
+			}
+			// If not, set the tail to go to newNode
+			else
+			{
+				tail->next = newNode;
+				newNode->prev = tail;
+				tail = newNode;
+			}
+			// Increment node
+			current = current->next;
+		}
 	}
 
 	return *this;

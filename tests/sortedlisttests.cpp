@@ -71,6 +71,44 @@ TEST_CASE("PreliminaryTests", "[RequiredOne]")
     REQUIRE(! l.isEmpty() );
 }
 
+TEST_CASE("SelfAssignment", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l = l;
+    REQUIRE(l.contains(1));
+}
+
+TEST_CASE("AssignmentTests1", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+    SortedList<unsigned, std::string> p;
+    REQUIRE(l.contains(1));
+    REQUIRE(l.contains(2));
+    REQUIRE(p.isEmpty() == true);
+    p = l;
+    REQUIRE(p.contains(1));
+    REQUIRE(p.size() == 2);
+    REQUIRE(p.contains(2));
+}
+
+TEST_CASE("AssignmentTests2", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    l.insert(2, "Two");
+
+    SortedList<unsigned, std::string> p;
+    p.insert(3, "Three");
+
+    p = l;
+    l.insert(4, "Four");
+    REQUIRE(p.contains(1));
+    REQUIRE(p.size() == 2);
+    REQUIRE(l.size() == 3);
+}
 
 TEST_CASE("ReverseInserts", "[RequiredOne]")
 {
