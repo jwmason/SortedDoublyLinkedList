@@ -143,6 +143,13 @@ SortedList<Key,Value> & SortedList<Key,Value>::operator=(const SortedList & st)
 template<typename Key, typename Value>
 SortedList<Key,Value>::~SortedList()
 {
+	// Loop through every Node and delete it
+	while(head != nullptr)
+	{
+		Node* current = head;
+		head = head->next;
+		delete current;
+	}
 }
 
 
