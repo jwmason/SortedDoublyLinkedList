@@ -123,9 +123,33 @@ SortedList<Key,Value>::SortedList() : head(nullptr)
 
 
 template<typename Key, typename Value>
-SortedList<Key,Value>::SortedList(const SortedList & st)
+SortedList<Key,Value>::SortedList(const SortedList & st) : head(nullptr)
 {
 	// SortedList l1 = l2
+	// Initialize Node pointer
+	Node* current = st.head;
+	Node* tail = nullptr;
+	// Loop through all the Nodes
+	while (current != nullptr)
+	{
+		// Initialize a newNode
+		Node* newNode = new Node(current->key, current->value);
+		// Check if head is null, then set newNode to it
+		if (head == nullptr)
+		{
+			head = newNode;
+			tail = newNode;
+		}
+		// If not, increment the newNode (it is already in order)
+		else
+		{
+			tail->next = newNode;
+			newNode->prev = tail;
+			tail = newNode;
+		}
+		// Increment Node
+		current = current->next;
+	}
 }
 
 
@@ -155,7 +179,7 @@ SortedList<Key,Value> & SortedList<Key,Value>::operator=(const SortedList & st)
 				head = newNode;
 				tail = newNode;
 			}
-			// If not, set the tail to go to newNode
+			// If not, increment the newNode (it is already in order)
 			else
 			{
 				tail->next = newNode;
@@ -166,11 +190,9 @@ SortedList<Key,Value> & SortedList<Key,Value>::operator=(const SortedList & st)
 			current = current->next;
 		}
 	}
-
 	return *this;
-
 }
-	
+
 template<typename Key, typename Value>
 SortedList<Key,Value>::~SortedList()
 {

@@ -110,6 +110,18 @@ TEST_CASE("AssignmentTests2", "[RequiredOne]")
     REQUIRE(l.size() == 3);
 }
 
+TEST_CASE("Copy1", "[RequiredOne]")
+{
+    SortedList<unsigned, std::string> l;
+    l.insert(1, "One");
+    SortedList<unsigned, std::string> p(l);
+    REQUIRE(p.contains(1) == true);
+    REQUIRE(p.size() == 1);
+    l.insert(2, "Two");
+    REQUIRE(p.contains(2) == false);
+    REQUIRE(p.size() == 1);
+}
+
 TEST_CASE("ReverseInserts", "[RequiredOne]")
 {
     SortedList<unsigned, std::string> l;
