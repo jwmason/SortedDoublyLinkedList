@@ -32,6 +32,10 @@ TEST_CASE("InsertTest", "[RequiredOne]")
     l.insert(2, "Two");
     REQUIRE(l.size() == 2);
     REQUIRE(l.insert(2, "ShouldFail") == false);
+    l.insert(0, "Zero");
+    REQUIRE(l.getIndex(0) == 0);
+    REQUIRE(l.getIndex(1) == 1);
+    REQUIRE(l.getIndex(2) == 2);
 }
 
 TEST_CASE("GetIndexTest", "[RequiredOne]")
