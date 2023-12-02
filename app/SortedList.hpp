@@ -125,12 +125,14 @@ SortedList<Key,Value>::SortedList() : head(nullptr)
 template<typename Key, typename Value>
 SortedList<Key,Value>::SortedList(const SortedList & st)
 {
+	// SortedList l1 = l2
 }
 
 
 template<typename Key, typename Value>
 SortedList<Key,Value> & SortedList<Key,Value>::operator=(const SortedList & st)
 {
+	// l1 = l2
 	if( this != &st )
 	{
 
@@ -257,6 +259,34 @@ bool SortedList<Key,Value>::contains(const Key &k) const noexcept
 template<typename Key, typename Value>
 void SortedList<Key,Value>::remove(const Key &k) 
 {
+	// Initialize Node pointer
+	Node* current = head;
+	// Loop through the Nodes until one is found with that key
+	while (current != nullptr && current->key != k)
+	{
+		current = current->next;
+	}
+	// If there is a key, continue. If not, silently end.
+	if (current != nullptr)
+	{
+		// Set the Nodes prev Node to its prev Node value
+		if (current->prev != nullptr)
+		{
+			current->prev->next = current->next;
+		}
+		// It's the first Node so make the second Node the first
+		else
+		{
+			head = current->next;
+		}
+		// Set the Nodes next Node to its next Node value
+		if (current->next != nullptr)
+		{
+			current->next->prev = current->prev;
+		}
+		// Delete the Node after adjustments to next and prev
+		delete current;
+	}
 }
 
 
