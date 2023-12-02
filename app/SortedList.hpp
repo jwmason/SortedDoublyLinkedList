@@ -462,7 +462,23 @@ const Key & SortedList<Key,Value>::smallestGreaterThan(const Key & k) const
 template <typename Key, typename Value>
 bool SortedList<Key,Value>::operator==(const SortedList & l) const noexcept
 {
-	return false;  // STUB;  fix then remove this comment
+	// Initialize Node pointers for SortedList and l
+	Node* current = head;
+	Node* currentl = l.head;
+	// Loop through all Nodes in both SortedLists
+	while (current != nullptr && currentl != nullptr)
+	{
+		// Check if the keys and values are the same. If not, return false
+		if (current->key != currentl->key || current->value != currentl->value)
+		{
+			return false;
+		}
+		// Increment Nodes
+		current = current->next;
+		currentl = currentl->next;
+	}
+	// Ensures that both lists are the same length and have the same key/value pairs
+	return current == nullptr && currentl == nullptr;
 }
 
 template <typename Key, typename Value>
