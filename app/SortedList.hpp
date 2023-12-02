@@ -484,6 +484,15 @@ bool SortedList<Key,Value>::operator==(const SortedList & l) const noexcept
 template <typename Key, typename Value>
 void SortedList<Key,Value>::operator++()
 {
+	// Initialize a Node pointer
+	Node* current = head;
+	// Loop through every Node
+	while (current != nullptr)
+	{
+		// Increment the value and go to next Node
+		current->value++;
+		current = current->next;
+	}
 }
 
 
