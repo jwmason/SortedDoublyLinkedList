@@ -412,7 +412,27 @@ const Value & SortedList<Key,Value>::operator[] (const Key &k) const
 template<typename Key, typename Value>
 const Key & SortedList<Key,Value>::largestLessThan(const Key & k) const
 {
-	throw KeyNotFoundException{"Key not found in list"};  // STUB;  fix then remove this comment
+	// Initialize Node pointer and Key pointer
+	Node* current = head;
+	Key* largestLessThan_key = nullptr;
+	// Loop through all the Nodes
+	while (current != nullptr)
+	{
+		// Check if the current key is less than given key. If so, temporarily set it as the largestLessThan_key
+		if (current->key < k)
+		{
+			largestLessThan_key = &current->key;
+		}
+		// Increment Node
+		current = current->next;
+	}
+	// Check if a key was found
+	if (largestLessThan_key != nullptr)
+	{
+		return *largestLessThan_key;
+	}
+	// If not, throw exception
+	throw KeyNotFoundException{"Key not found in list"};
 }
 
 template<typename Key, typename Value>
